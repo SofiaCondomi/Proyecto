@@ -46,12 +46,13 @@ class TracksTableViewController: UITableViewController {
     
     @objc func changeIcon(_ notification: Notification) {
             guard let mysong = notification.object as? Bool else {
-                print("ESTO NO FUNCIONA")
+                //print("ESTO NO FUNCIONA")
+                print("holis")
                 return}
-                print("ACA ESTA EL ESTADO DE LA CANCION")
+                //print("ACA ESTA EL ESTADO DE LA CANCION")
                 print(mysong)
                 if mysong {
-                print("CAMBIO DE ESTADO BOTON")
+                //print("CAMBIO DE ESTADO BOTON")
                 } else {
                     //estadocancion = mysong
         //print("No soy igual.")
