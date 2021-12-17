@@ -11,6 +11,7 @@ import UIKit
 class TracksTableViewController: UITableViewController {
 
     var _misTracks = [Track]()
+    var estadomusica:Bool = false
     var estadocancion:Bool = false
     
     override func viewDidLoad() {
@@ -46,15 +47,14 @@ class TracksTableViewController: UITableViewController {
     
     @objc func changeIcon(_ notification: Notification) {
             guard let mysong = notification.object as? Bool else {
-                //print("ESTO NO FUNCIONA")
                 print("holis")
                 return}
-                //print("ACA ESTA EL ESTADO DE LA CANCION")
-                print(mysong)
+                print("ESTO ES OBSERVER TVCONTROLER true")
+                estadocancion = mysong
                 if mysong {
                 //print("CAMBIO DE ESTADO BOTON")
                 } else {
-                    //estadocancion = mysong
+                print("ESTO ES OBSERVER TVCONTROLER false")
         //print("No soy igual.")
                 }
     //addTrack(addedTrack: mysong)
@@ -87,15 +87,17 @@ class TracksTableViewController: UITableViewController {
         let elTrack = misTracks[indexPath.row]
         cell.titulo.text = elTrack.title
         cell.artista.text = elTrack.artist
+        cell.imageView?.image = (UIImage(named: "imagen"))
         cell.track = elTrack
         cell.parent = self
-        //print("ESTADO CANCION")
-        //print(estadocancion)
-        cell.botonPlay.isPlaying = estadocancion
-        
+        cell.botonPlay.isPlaying = estadomusica
         cell.backgroundColor = UIColor(patternImage: UIImage(named: "fondo.png")!)
         cell.textLabel?.textColor = .black
         cell.botonPlay.performTwoStateSelection()
+        if estadocancion {
+            
+            
+        }
 
         return cell
         
@@ -103,8 +105,8 @@ class TracksTableViewController: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! TrackTableViewCell
-        cell.botonPlay.performTwoStateSelection()
+        //let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! TrackTableViewCell
+        //cell.botonPlay.performTwoStateSelection()
     }
     
     
@@ -112,9 +114,18 @@ class TracksTableViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! TrackTableViewCell
+        
+        
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        if estadocancion {
+            
+            
+        }
         tableView.reloadData()
         
        

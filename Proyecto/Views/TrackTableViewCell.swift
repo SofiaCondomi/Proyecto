@@ -10,6 +10,7 @@ import UIKit
 class TrackTableViewCell: UITableViewCell {
     var track:Track?
     var parent:ButtonOnCellDelegate?
+    var estadocancion:Bool = false
     
     
     
@@ -20,7 +21,7 @@ class TrackTableViewCell: UITableViewCell {
         
         let imgView = UIImageView()
         imgView.contentMode = .scaleAspectFit
-        imgView.image = UIImage(named: "nota2")
+        imgView.image = UIImage(named: "cancion")
         imgView.backgroundColor = UIColor(red: 255.0, green: 0, blue: 225.0, alpha: 0.5)
         imgView.translatesAutoresizingMaskIntoConstraints = false
         return imgView
@@ -110,8 +111,6 @@ class TrackTableViewCell: UITableViewCell {
     
     @objc func callButtom(_ sender:UIButton!) {
             botonPlay.performTwoStateSelection()
-            //let repro = BotonDestacado()
-            //repro.isPlaying = false
             if parent != nil {
                 parent?.buttonTouchedOnCell(celda: self)
             }
@@ -124,15 +123,13 @@ class TrackTableViewCell: UITableViewCell {
     @objc func changeIcon(_ notification: NSNotification){
         print(notification)
         guard let mysong = notification.object as? Bool else {
-                print("NO LLEGA NADA")
+                print("ESTO ES IS PLAYING TV CELL NO LLEGA NADA")
                 return}
-                print("ACA ESTA EL ESTADO DE LA CANCION")
-                print(mysong)
                     if mysong {
-                                print("CAMBIO DE ESTADO BOTON")
-            
+                        print("ESTO ES IS PLAYING TV CELL \(mysong)")
+                        estadocancion = mysong
                     } else {
-                        
+                        print("ESTO ES IS PLAYING TV CELL \(mysong)")
                     }
             //addTrack(addedTrack: mysong)
         }

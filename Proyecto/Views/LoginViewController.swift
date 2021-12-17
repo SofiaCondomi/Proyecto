@@ -92,15 +92,6 @@ class LoginViewController: UIViewController {
         guard let fondo = UIImage(named: "fondo.png") else { return }
         self.view.backgroundColor = UIColor(patternImage: fondo)
         
-        //button.frame(forAlignmentRect: CGRect(x: 155, y: 400, width: 100, height: 40))
-        //button.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor).isActive = true
-        //button.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
-        //button.heightAnchor.constraint(equalToConstant: 10).isActive = true
-        //button.widthAnchor.constraint(equalToConstant: 10).isActive = true
-//        button.backgroundColor = UIColor(named: "Color")
-//        button.setTitle("Continue", for: .normal)
-//        button.cornerRadius = 20
-//        button.spinnerColor = .white
         self.view.addSubview(button)
         button.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
         
@@ -109,7 +100,7 @@ class LoginViewController: UIViewController {
         button.topAnchor.constraint(equalTo: Password.bottomAnchor, constant: 30).isActive = true
         button.heightAnchor.constraint(equalToConstant: 40).isActive = true
         button.widthAnchor.constraint(equalToConstant: 90).isActive = true
-        //button.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 50).isActive = true
+        
         
         
         
@@ -119,7 +110,6 @@ class LoginViewController: UIViewController {
     
     func bindViewModel() {
         viewModel = LoginViewModel()
-        //self.goToTab()
     }
     
     override func viewWillAppear(_ animated: Bool) {

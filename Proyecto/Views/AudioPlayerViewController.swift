@@ -24,6 +24,18 @@ class AudioPlayerViewController: ViewController {
     
     // Seteo de objetos en la vista
     
+    var imagencancion: UIImage = {
+        let img = UIImage()
+        return img
+    }()
+    
+    var label: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints=false
+        label.autoresizingMask = .flexibleWidth
+        return label
+    }()
+    
     var Gif: UIImageView = {
         let loveURL = Bundle.main.url(forResource: "heart", withExtension: ".gif")
         let loveGIF = UIImage.animatedImage(withAnimatedGIFURL: loveURL!)
@@ -33,9 +45,6 @@ class AudioPlayerViewController: ViewController {
     
     var vista: UIView = {
         let v1 = UIView()
-        //let v1 = UIImage(named: "add.png")
-        //v1.setImage(b1Image, for: .normal)
-        //v1.autoresizingMask = .flexibleWidth
         v1.translatesAutoresizingMaskIntoConstraints=false
         v1.autoresizingMask = .flexibleWidth
         return v1
@@ -120,6 +129,7 @@ class AudioPlayerViewController: ViewController {
     @objc func play() {
         mySound?.play()
         isPlaying = true
+        
     }
     
     @objc func stop() {
@@ -153,9 +163,7 @@ class AudioPlayerViewController: ViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //self.delegado = self
         indexDelTrack = misTracks.firstIndex(of: titleName!)
-        titleName?.isPlaying = false
         
         // Fondo
         guard let fondo = UIImage(named: "fondo.png") else { return }
@@ -169,6 +177,9 @@ class AudioPlayerViewController: ViewController {
             myTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateSlider), userInfo: nil, repeats: true)
             mySound?.play()
             isPlaying = true
+            //isPlaying = ((titleName?.isPlaying) != nil)
+            titleName?.isPlaying = isPlaying
+            print("ESTO ES IS PLAYING \(titleName?.isPlaying) del play")
                             } catch {
                                 print("Sound initialization failed")
                             }
@@ -186,6 +197,10 @@ class AudioPlayerViewController: ViewController {
         label1.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15).isActive = true
         label1.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive     = true
         label1.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20).isActive  = true
+        
+        //imagencancion.setIm
+        
+        
    
         
          let label2 = UILabel()
@@ -287,22 +302,19 @@ class AudioPlayerViewController: ViewController {
         slider.value = 1
 
         
-        // Esto busca el gif en el main
+        // buscar gif
         guard let laURL = Bundle.main.url(forResource: "WAVE-1s", withExtension: ".gif") else {return}
-        // Usa el metodo animated gif con la url (direccion) del gif
         let elGIF = UIImage.animatedImage(withAnimatedGIFURL: laURL)
-        // Pone ese gif en un UIImage view, que es el que se puede agregar a la vista
         let imgContainer = UIImageView(image: elGIF)
             
         // Seteo del gif
         imgContainer.autoresizingMask = .flexibleWidth
         imgContainer.translatesAutoresizingMaskIntoConstraints=true
-        //imgContainer.frame=CGRect(x: 0, y: 520, width: self.view.frame.width, height: 150)
         imgContainer.frame=CGRect(x: 0, y: 520, width: self.view.frame.width, height: 150)
         self.view.addSubview(imgContainer)
         
-        vista.alpha = 0
-        vista.backgroundColor = .clear//UIColor(named: "Color")? .withAlphaComponent(0.4)
+        
+        vista.backgroundColor = .white .withAlphaComponent(0)//UIColor(named: "Color")? .withAlphaComponent(0.4)
         vista.isHidden = true
         vista.layer.cornerRadius = 20
         self.view.addSubview(vista)
@@ -320,15 +332,20 @@ class AudioPlayerViewController: ViewController {
         
         self.view.addSubview(Gif)
         Gif.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
-        //Gif.widthAnchor.constraint(equalTo: 50).isActive = true
-            
         Gif.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor).isActive = true
-        Gif.widthAnchor.constraint(equalToConstant: 200).isActive = true
+        //Gif.widthAnchor.constraint(equalToConstant: 200).isActive = true
         Gif.heightAnchor.constraint(equalToConstant: 200).isActive = true
         Gif.widthAnchor.constraint(equalToConstant: 250).isActive = true
         
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "changeButtonIcon")
-                                        ,object: self.titleName?.isPlaying)
+        label.alpha = 0
+        label.isHidden = true
+        self.view.addSubview(label)
+        label.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        label.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor, constant: -65).isActive = true
+        label.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        label.widthAnchor.constraint(equalToConstant: 200).isActive = true
+        
+        
         
         
         
@@ -395,7 +412,7 @@ class AudioPlayerViewController: ViewController {
             }),
             
             UIAction(title: "Love", image: UIImage(systemName: "heart"), handler: { (_) in
-                self.vistaCustom(vista: self.vista, texto: "hola", gif: self.Gif)
+                self.vistaCustom(vista: self.vista, texto: "hola", gif: self.Gif, label: self.label)
             }),
             
             UIAction(title: "Suggest Less Like This", image: UIImage(systemName: "hand.thumbsdown.fill"), handler: { (_) in
@@ -408,7 +425,10 @@ class AudioPlayerViewController: ViewController {
     }
     override func viewWillDisappear(_ animated: Bool) {
             super.viewWillDisappear(animated)
-        titleName?.isPlaying = false
+        titleName?.isPlaying = isPlaying
+        
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "changeButtonIcon")
+                                        ,object: self.titleName?.isPlaying)
         
         
         

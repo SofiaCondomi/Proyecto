@@ -23,7 +23,7 @@ struct Track: Codable, Hashable {
     let album: String?
     let song_id: String?
     let genre: String?
-    var isPlaying: Bool? //= false
+    var isPlaying: Bool = false
     //let duration: String?
     
     enum CodingKeys: String, CodingKey {

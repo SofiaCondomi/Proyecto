@@ -45,40 +45,39 @@ extension ViewController {
         
     }
     
-    func vistaCustom(vista: UIView, texto: String, gif: UIImageView) {
+    func vistaCustom(vista: UIView, texto: String, gif: UIImageView, label: UILabel) {
         var timer = Timer()
         //alerta.alpha = 1
         //textoalerta.alpha = 1
         UIView.animate(withDuration: 1, delay: 0, animations:   {
             
-            vista.backgroundColor = UIColor(named: "Color")? .withAlphaComponent(0.7)
+            //vista.backgroundColor = UIColor(named: "Color")? .withAlphaComponent(0.7)
+            vista.backgroundColor = .white
             vista.isHidden = false
             gif.isHidden = false
-            //vista.layer.cornerRadius = 100
-            vista.alpha = 0.7
+            vista.alpha = 1
             gif.alpha = 1
-//            textovista.alpha = 1
-//            textovista.tintColor = UIColor(named: "Color")
-//            textovista.textColor = UIColor(named: "Color")
-//            vista.backgroundColor = .white .withAlphaComponent(1)
-//            //alerta.backgroundColor?.withAlphaComponent(0.5)
-//            vista.isHidden = false
-//            vista.center.y += 300
-//            textovista.text = texto
-//            textovista.alpha = 1
+            label.alpha = 1
+            label.isHidden = false
+            label.backgroundColor = .clear
+            label.text = texto
+            label.textAlignment = .center
+            label.textColor = UIColor(named: "Color")
             
             print("no se puede ingresar")
         
             }) { _ in
                 
-                UIView.animate(withDuration: 1, delay: 0) {
-                    timer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false, block: { (timer) in
+                UIView.animate(withDuration: 0, delay: 0) {
+                    timer = Timer.scheduledTimer(withTimeInterval: 1.5, repeats: false, block: { (timer) in
                         
                         vista.alpha = 0
                         gif.alpha = 0
+                        label.alpha = 0
+                        label.isHidden = true
                         vista.isHidden = true
                         gif.isHidden = true
-                        //textovista.alpha = 0
+                        
                         
                         
                 })

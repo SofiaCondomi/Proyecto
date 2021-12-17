@@ -122,6 +122,23 @@ class PlayListDetailControllerTableViewController: UIViewController, UITableView
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
+    
+    func tableview( _ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle{
+            return .delete
+        }
+
+    func tableView( _ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath){
+            if editingStyle == .delete{
+                tableView.beginUpdates()
+
+                //esto esta bien?
+                let track = tracksArray.remove(at: indexPath.row)
+                tracks.remove(track)
+
+                tableView.deleteRows(at: [indexPath], with: .fade)
+                tableView.endUpdates()
+            }
+        }
 
     
 }

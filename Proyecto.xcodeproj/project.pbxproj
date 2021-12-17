@@ -52,6 +52,7 @@
 		DAC4336E27589D4B009A370E /* InicioViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC4336D27589D4B009A370E /* InicioViewModel.swift */; };
 		DAC5917D2733209C00195057 /* TracksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC5917C2733209C00195057 /* TracksTableViewController.swift */; };
 		DAC7089C276280FF0049B5FA /* DownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC7089B276280FF0049B5FA /* DownloadManager.swift */; };
+		DAD155D4276C361700882D74 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD155D3276C361700882D74 /* RegisterViewModel.swift */; };
 		DAEFB6A62747D38B0051E356 /* Network.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAEFB6A52747D38B0051E356 /* Network.framework */; };
 /* End PBXBuildFile section */
 
@@ -128,6 +129,7 @@
 		DAC4336D27589D4B009A370E /* InicioViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InicioViewModel.swift; sourceTree = "<group>"; };
 		DAC5917C2733209C00195057 /* TracksTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TracksTableViewController.swift; sourceTree = "<group>"; };
 		DAC7089B276280FF0049B5FA /* DownloadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadManager.swift; sourceTree = "<group>"; };
+		DAD155D3276C361700882D74 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		DAEFB6A52747D38B0051E356 /* Network.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Network.framework; path = System/Library/Frameworks/Network.framework; sourceTree = SDKROOT; };
 		F1C083E6C2F43F5F624BD60C /* Pods-ProyectoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProyectoTests.release.xcconfig"; path = "Target Support Files/Pods-ProyectoTests/Pods-ProyectoTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -255,9 +257,9 @@
 				DA167CA52722F3EC00E835FC /* LaunchScreen.storyboard */,
 				DABFB5292744B7D500121BFF /* InicioViewController.swift */,
 				DABBD4A6276975F40096014E /* LoginViewController.swift */,
+				DAC356B82729C12C0086B868 /* RegisterViewController.swift */,
 				DABDBF0C272C41B3006BAC69 /* BienvenidaViewController.swift */,
 				DA167C9B2722F3EA00E835FC /* ViewController.swift */,
-				DAC356B82729C12C0086B868 /* RegisterViewController.swift */,
 				DA00C3D2274D6D1200FF5FD2 /* BotonDestacado.swift */,
 				DAC5917C2733209C00195057 /* TracksTableViewController.swift */,
 				DAC26E672735588600EA3320 /* TrackTableViewCell.swift */,
@@ -293,6 +295,7 @@
 			children = (
 				DAC4336D27589D4B009A370E /* InicioViewModel.swift */,
 				DABBD4A8276976B50096014E /* LoginViewModel.swift */,
+				DAD155D3276C361700882D74 /* RegisterViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -574,6 +577,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DABBD4A7276975F40096014E /* LoginViewController.swift in Sources */,
+				DAD155D4276C361700882D74 /* RegisterViewModel.swift in Sources */,
 				DAC26E662735575000EA3320 /* ButtomOnCellDelagate.swift in Sources */,
 				DAC320EE273E12D70090A2C3 /* UIImage+animatedGIF.m in Sources */,
 				DAC4336E27589D4B009A370E /* InicioViewModel.swift in Sources */,

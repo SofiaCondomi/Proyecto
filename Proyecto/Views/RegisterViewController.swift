@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import TransitionButton
 class RegisterViewController: UIViewController {
 
     //viewDidLoad ------------------------------
@@ -23,12 +23,53 @@ class RegisterViewController: UIViewController {
         guard let fondo = UIImage(named: "fondo.png") else { return }
         self.view.backgroundColor = UIColor(patternImage: fondo)
         
+        
+        button.translatesAutoresizingMaskIntoConstraints=false
+        
+        self.view.addSubview(button)
+        button.heightAnchor.constraint(equalToConstant: 35).isActive = true
+        button.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        button.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        
+        button.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor, constant: -20).isActive = true
+//        button.trailingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 50).isActive = true
+//        button.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -50).isActive = true
+//        button.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50).isActive = true
+        
+        
+        
+        //buttomstop.frame=CGRect(x: 200, y: 340, width: 80, height: 80)
+        button.tintColor=UIColor(red: 255.0, green: 0, blue: 225.0, alpha: 1)
+        
+        
+        
+        
+        button.addTarget(self, action: #selector(Register(_:)), for: .touchUpInside)
+        
+        bindViewModel()
     }
     
+    let button: TransitionButton = {
+        let boton = TransitionButton()
+        boton.backgroundColor = UIColor(named: "Color")
+        boton.setTitle("Register", for: .normal)
+        boton.cornerRadius = 10
+        boton.spinnerColor = .white
+        boton.autoresizingMask = .flexibleWidth
+        boton.translatesAutoresizingMaskIntoConstraints=false
+        return boton
+    }()
+    
     // Variables y constantes --------------------
+    var viewModel: RegisterViewModel?
     var counter: Int = 1
     let numberofcolors: Int = 2
     var typeError = 0
+    
+    func bindViewModel() {
+        viewModel = RegisterViewModel()
+        //self.goToTab()
+    }
     
     // Outlets
     @IBOutlet weak var EnterEmail: UITextField!
@@ -57,38 +98,70 @@ class RegisterViewController: UIViewController {
     
     @IBAction func Register(_ sender: Any) {
         
-        //Desempaquetado Mail -------------------------
-        guard let user = EnterEmail.text, !user.isEmpty else {
-            typeError = 2
-            print("Ingresar Email o Username")
-            return
-            }
-        
-        //Registro ----------------------------------
-        let resultadomail: Bool = chequeoMail(mailIngresado: user)
-        if resultadomail == true {
-            print ("Registrar mail")
-            let callBack: ([Track]?, Error?) -> () = { canciones, error in
-                if error != nil {
-                    print("no se pudo obtener canciones")
-    
+        button.startAnimation()
+        DispatchQueue.main.asyncAfter(deadline: .now()+0.3) {
+            // pass: self.Password.text, alerta: self.alerta, textoalerta: self.textoalerta
+        self.viewModel?.botonLoginTouch(email: self.EnterEmail.text)
+        guard let valid = self.viewModel?.validUser else { return }
+
+            if valid {
+                self.button.stopAnimation(animationStyle: .expand)
+                print(valid)
+                print("El usuario es valido")
+                DispatchQueue.main.asyncAfter(deadline: .now()+0.4) {
+                self.goToMainViewController()
+                self.viewModel?.validUser = false
                 }
-                else {
-                    misTracks = canciones ?? []
-                    
-                }
-                
+                //button.stopAnimation()
+            } else {
+                //DispatchQueue.main.asyncAfter(deadline: .now()+1) {
+                self.button.stopAnimation(animationStyle: .shake)
+                //}
             }
-            //let api = APIManager()
-            //api.getMusic(completion: callBack)
-            goToMainViewController()
-        } else {
-            typeError = 2
-            print("Formato de mail incorrecto")
         }
         
-    }
-    
+//
+//        //Desempaquetado Mail -------------------------
+//        guard let user = EnterEmail.text, !user.isEmpty else {
+//            typeError = 2
+//            print("Ingresar Email o Username")
+//            self.button.stopAnimation(animationStyle: .shake)
+//            return
+//            }
+//
+//        //Registro ----------------------------------
+//        let resultadomail: Bool = chequeoMail(mailIngresado: user)
+//        if resultadomail == true {
+//            print ("Registrar mail")
+//            let callBack: ([Track]?, Error?) -> () = { canciones, error in
+//                if error != nil {
+//                    print("no se pudo obtener canciones")
+//
+//                }
+//                else {
+//                    misTracks = canciones ?? []
+//
+//                }
+//
+//            }
+//
+//            //DispatchQueue.main.asyncAfter(deadline: .now()+0.3) {
+//               // DispatchQueue.main.asyncAfter(deadline: .now()+0.3) {
+//                    self.button.stopAnimation(animationStyle: .expand)
+//                //}
+//               // DispatchQueue.main.asyncAfter(deadline: .now()+0.6) {
+//               // self.goToMainViewController()
+//               // }
+//            //}
+//        } else {
+//
+//            typeError = 2
+//            print("Formato de mail incorrecto")
+//
+//        }
+//
+   }
+   
     @IBAction func Dismiss(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
@@ -98,18 +171,18 @@ class RegisterViewController: UIViewController {
     }
 
 //--Validacion de Mail ---------------
-        
-    func chequeoMail (mailIngresado: String) -> Bool {
-        let patron = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-        let regExp = try! NSRegularExpression(pattern: patron, options: [])
-        let coincidencias = regExp.matches(in: mailIngresado, options: [], range: NSRange(location: 0, length: mailIngresado.count))
-        if coincidencias.count == 1 {
-                return true
-        }
-        else {
-                return false
-        }
-    }
+//
+//    func chequeoMail (mailIngresado: String) -> Bool {
+//        let patron = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+//        let regExp = try! NSRegularExpression(pattern: patron, options: [])
+//        let coincidencias = regExp.matches(in: mailIngresado, options: [], range: NSRange(location: 0, length: mailIngresado.count))
+//        if coincidencias.count == 1 {
+//                return true
+//        }
+//        else {
+//                return false
+//        }
+//    }
 
 // Ir a pantalla de bienvenida ------------------
     
