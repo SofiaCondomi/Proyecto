@@ -22,11 +22,14 @@ class RegisterViewController: UIViewController {
         OrEnter.textColor = UIColor(named: "Color")
         guard let fondo = UIImage(named: "fondo.png") else { return }
         self.view.backgroundColor = UIColor(patternImage: fondo)
-        
-        
-        button.translatesAutoresizingMaskIntoConstraints=false
+        vista.isHidden = true
+        label.alpha = 0
+        //alerta.alpha = 0
+        vista.backgroundColor = UIColor(named: "Color")? .withAlphaComponent(0)
         
         self.view.addSubview(button)
+        button.translatesAutoresizingMaskIntoConstraints=false
+        
         button.heightAnchor.constraint(equalToConstant: 35).isActive = true
         button.widthAnchor.constraint(equalToConstant: 100).isActive = true
         button.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
@@ -79,6 +82,8 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var buttom: UIButton!
     @IBOutlet weak var Register: UIButton!
     @IBOutlet weak var Dismiss: UIButton!
+    @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var vista: UIView!
     
     // Actions -----------------------------------
     
@@ -99,9 +104,9 @@ class RegisterViewController: UIViewController {
     @IBAction func Register(_ sender: Any) {
         
         button.startAnimation()
-        DispatchQueue.main.asyncAfter(deadline: .now()+0.3) {
+        DispatchQueue.main.asyncAfter(deadline: .now()+0.5) {
             // pass: self.Password.text, alerta: self.alerta, textoalerta: self.textoalerta
-        self.viewModel?.botonLoginTouch(email: self.EnterEmail.text)
+            self.viewModel?.botonLoginTouch(email: self.EnterEmail.text, alerta: self.vista, textoalerta: self.label)
         guard let valid = self.viewModel?.validUser else { return }
 
             if valid {

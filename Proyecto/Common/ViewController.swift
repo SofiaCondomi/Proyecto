@@ -133,7 +133,7 @@ class ViewController: UIViewController {
                     alertaanimada(alerta: alerta, textoalerta: textoalerta, texto: texto)
                     return
                     }*/
-    }
+}
 
 //----- Validacion de Mail ---------------
  /*

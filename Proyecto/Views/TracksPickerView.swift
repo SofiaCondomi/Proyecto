@@ -14,7 +14,7 @@ class TracksPickerView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
     let UIPicker: UIPickerView = UIPickerView()
     let TableView: UITableView = UITableView()
     
-    // Llenado del picker
+    // MARK: Llenado del picker
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
        return 1
     }
@@ -29,14 +29,13 @@ class TracksPickerView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
         }
 
     
-    // Seteo de objetos:
+    // MARK: Seteo de objetos:
     
     var BotonDismiss: UIButton = {
         let b1 = UIButton(type: .roundedRect)
         let b1Image = UIImage(named: "dismiss")
         b1.setImage(b1Image, for: .normal)
         b1.autoresizingMask = .flexibleWidth
-        //b1.translatesAutoresizingMaskIntoConstraints=true
         b1.translatesAutoresizingMaskIntoConstraints=false
         b1.addTarget(self, action: #selector(dismiss), for: .touchUpInside)
         return b1
@@ -70,7 +69,7 @@ class TracksPickerView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
             self.backgroundColor = .clear
           }
     
-    // Dibujar objetos en la vista
+    // MARK: Dibujar objetos en la vista
     override func draw(_ rect: CGRect) {
         
         TableView.backgroundColor = .clear
@@ -87,7 +86,6 @@ class TracksPickerView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
         BotonDismiss.translatesAutoresizingMaskIntoConstraints=true
         BotonDismiss.autoresizingMask = .flexibleLeftMargin
         self.addSubview(BotonDismiss)
-        
         
         Botonadd.frame=CGRect(x: 20, y: 30, width: 50, height: 50)
         Botonadd.tintColor=UIColor(red: 255.0, green: 0, blue: 225.0, alpha: 1)

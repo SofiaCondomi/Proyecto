@@ -7,8 +7,9 @@
 
 import Foundation
 import UIKit
+import CoreData
 
-class RegisterViewModel: ViewController {
+class RegisterViewModel: UIViewController {
     let model: Registered = Registered()
     var validUser = false
     
@@ -16,13 +17,13 @@ class RegisterViewModel: ViewController {
     
     
     //, alerta:UIView, textoalerta:UILabel
-    func botonLoginTouch(email:String?) {
+    func botonLoginTouch(email:String?, alerta:UIView, textoalerta:UILabel) {
         
         //Desempaquetado Mail -------------------------
         guard let user = email, !user.isEmpty else {
             let texto = "Ingresar Email o Username"
             DispatchQueue.main.asyncAfter(deadline: .now()+0.6) {
-                //self.alertaanimada(alerta: alerta, textoalerta: textoalerta, texto: texto)
+                Animaciones.alertaanimada(alerta: alerta, textoalerta: textoalerta, texto: texto)
             }
             return
             }
@@ -32,9 +33,13 @@ class RegisterViewModel: ViewController {
 //        }
         //Registro ----------------------------------
         let resultadomail: Bool = chequeoMail(mailIngresado: user)
+        
+        
+        
         if resultadomail == true && user != model.user1.user {
             print ("Registrar mail")
             validUser = true
+            savedData()
             let callBack: ([Track]?, Error?) -> () = { canciones, error in
                 if error != nil {
                     print("no se pudo obtener canciones")
@@ -46,20 +51,20 @@ class RegisterViewModel: ViewController {
                 }
                 
             }
-            
-            //DispatchQueue.main.asyncAfter(deadline: .now()+0.3) {
-               // DispatchQueue.main.asyncAfter(deadline: .now()+0.3) {
-                    //self.button.stopAnimation(animationStyle: .expand)
-                //}
-               // DispatchQueue.main.asyncAfter(deadline: .now()+0.6) {
-               // self.goToMainViewController()
-               // }
-            //}
+           
         } else {
             
-            //typeError = 2
             print("Formato de mail incorrecto")
             
+            if user == model.user1.user {
+                DispatchQueue.main.asyncAfter(deadline: .now()+0.6) {
+                    let texto = "Usuario ya registrado"
+            Animaciones.alertaanimada(alerta: alerta, textoalerta: textoalerta, texto: texto)
+                }
+            } else {
+            let texto = "Formato de mail incorrecto"
+            Animaciones.alertaanimada(alerta: alerta, textoalerta: textoalerta, texto: texto)
+            }
         }
         
     }
@@ -75,6 +80,88 @@ class RegisterViewModel: ViewController {
         }
         else {
                 return false
+        }
+    }
+    
+    func savedData() {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
+        let context = appDelegate.managedObjectContext
+        
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Tracklist")
+        request.returnsDistinctResults = false
+        
+        do {
+            let result = try context!.fetch(request)
+            misTracks = [Track]()
+            
+            for data in result as! [NSManagedObject] {
+                let title = data.value(forKey: "title") as? String
+                let artist = data.value(forKey: "artist") as? String
+                let album = data.value(forKey: "album") as? String
+                let genre = data.value(forKey: "genre") as? String
+                let songId = data.value(forKey: "song_id") as? String
+                
+                let track = Track(title: title ?? "",
+                                  artist: artist ?? "",
+                                  album: album ?? "",
+                                  song_id: songId ?? "",
+                                  genre: genre ?? "",
+                                  isPlaying: false)
+                misTracks.append(track)
+                
+                
+            }
+            
+        } catch {
+            print("Fallo al obtener info de la BD, \(error), \(error.localizedDescription)")
+        }
+        
+        downloadTracks()
+        if false {// Poner la validacion de si hay o no internet
+            //
+        }
+    }
+    
+    func downloadTracks() {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
+        let context = appDelegate.managedObjectContext
+        
+        RestServiceManager.shared.getToServer(responseType: [Track].self, method: .get, endpoint: "songs") {
+            status, data in
+            misTracks = [Track]()
+            if let _data = data {
+                misTracks = _data
+                
+                // CORE DATA
+                if let _context = context {
+                    let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Tracklist")
+                    let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+                    
+                    do {
+                        try  appDelegate.persistentStoreCoordinator?.execute(deleteRequest, with: _context)
+                    } catch {
+                        print(error)
+                    }
+                    
+                    // Agregar contenido
+                    for item in _data {
+                        guard let tracksEntity = NSEntityDescription.insertNewObject(forEntityName: "Tracklist", into: _context) as? NSManagedObject else {
+                            return
+                        }
+                        tracksEntity.setValue(item.artist, forKey: "artist")
+                        tracksEntity.setValue(item.genre, forKey: "genre")
+                        tracksEntity.setValue(item.album, forKey: "album")
+                        tracksEntity.setValue(item.song_id, forKey: "song_id")
+                        tracksEntity.setValue(item.title, forKey: "title")
+                        tracksEntity.setValue(item.isPlaying , forKey: "isPlaying")
+                        do {
+                            try _context.save()
+                        } catch {
+                            print("No se guardo la info \(error), \(error.localizedDescription)")
+                        }
+                    }
+                }
+            }
         }
     }
 }

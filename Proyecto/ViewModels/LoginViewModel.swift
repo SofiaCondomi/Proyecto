@@ -22,7 +22,7 @@ class LoginViewModel: ViewController {
             //typeError = 1
             let texto = "Por favor, ingrese un usuario"
             DispatchQueue.main.asyncAfter(deadline: .now()+0.6) {
-                self.alertaanimada(alerta: alerta, textoalerta: textoalerta, texto: texto)
+            Animaciones.alertaanimada(alerta: alerta, textoalerta: textoalerta, texto: texto)
             }
             return
         }
@@ -32,7 +32,7 @@ class LoginViewModel: ViewController {
             //typeError = 3
             let texto = "Por favor, ingrese un password"
             DispatchQueue.main.asyncAfter(deadline: .now()+0.6) {
-            self.alertaanimada(alerta: alerta, textoalerta: textoalerta, texto: texto)
+            Animaciones.alertaanimada(alerta: alerta, textoalerta: textoalerta, texto: texto)
             }
             return
             }
@@ -57,7 +57,7 @@ class LoginViewModel: ViewController {
                         print("Los datos ingresados no son correctos")
                         let texto = "Los datos ingresados no son correctos"
                         DispatchQueue.main.asyncAfter(deadline: .now()+0.6) {
-                        self.alertaanimada(alerta: alerta, textoalerta: textoalerta, texto: texto)
+                        Animaciones.alertaanimada(alerta: alerta, textoalerta: textoalerta, texto: texto)
                         }
                         return
                         }
@@ -65,7 +65,7 @@ class LoginViewModel: ViewController {
                     print("Formato de email o password incorrecto")
                     let texto = "Formato de email o password incorrecto"
                     DispatchQueue.main.asyncAfter(deadline: .now()+0.6) {
-                    self.alertaanimada(alerta: alerta, textoalerta: textoalerta, texto: texto)
+                    Animaciones.alertaanimada(alerta: alerta, textoalerta: textoalerta, texto: texto)
                     }
                     return
                     }

@@ -14,11 +14,9 @@ class TrackTableViewCell: UITableViewCell {
     
     
     
-    
+    // MARK: Instancia los objetos de la vista
     var icono: UIImageView = {
-        
-        // Instancia los objetos de la vista
-        
+
         let imgView = UIImageView()
         imgView.contentMode = .scaleAspectFit
         imgView.image = UIImage(named: "cancion")
@@ -50,7 +48,6 @@ class TrackTableViewCell: UITableViewCell {
         btn.icon = UIImage(systemName: "play.circle.fill", withConfiguration: config)
         btn.secondIcon = UIImage(systemName: "pause.circle.fill", withConfiguration: config)
         btn.performTwoStateSelection()
-        //btn.backgroundColor = UIColor(red: 255.0, green: 0, blue: 225.0, alpha: 0.5)
         btn.tintColor = UIColor(named: "Color")
         btn.backgroundColor = .white
         btn.layer.cornerRadius = 25
@@ -64,7 +61,7 @@ class TrackTableViewCell: UITableViewCell {
        
     }
     
-    // Quitar la celda seleccionada
+    // MARK: Quitar la celda seleccionada
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
@@ -73,7 +70,7 @@ class TrackTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        // Setea constrains y agrega a la vista los elementos
+        // MARK: Setea constrains y agrega a la vista los elementos
         
         addSubview(icono)
         NSLayoutConstraint.activate([
@@ -108,7 +105,7 @@ class TrackTableViewCell: UITableViewCell {
             artista.trailingAnchor.constraint(equalTo: botonPlay.safeAreaLayoutGuide.leadingAnchor, constant: -5)
         ])
     }
-    
+    // MARK: Func CallButtom
     @objc func callButtom(_ sender:UIButton!) {
             botonPlay.performTwoStateSelection()
             if parent != nil {
@@ -131,7 +128,6 @@ class TrackTableViewCell: UITableViewCell {
                     } else {
                         print("ESTO ES IS PLAYING TV CELL \(mysong)")
                     }
-            //addTrack(addedTrack: mysong)
         }
     
     required init?(coder: NSCoder) {

@@ -43,24 +43,9 @@ enum Genero: String, Codable {
     case Otros
     case vacio = ""
 }
-/*
-enum PlayerStates {
-    case play
-    case pause
-    case next
-    case previous
-}
-*/
+
 
 var tracks = Set<Track>()
 var tracksArray = [Track]()
 var misTracks = [Track]()
-/*
-let misTracks = [     Track(title:"Like A Rolling Stone", artist:"Bob Dylan", album:"", song_id: "", genre: "", duration: ""),
-                          Track(title:"Walk On The Wild Side", artist:"Lou Reed", album:"", song_id: "", genre: "", duration: ""),
-                          Track(title:"Take It Or Leave It ", artist:"Cage The Elpehant", album:"", song_id: "", genre: "", duration: ""),
-                          Track(title:"Blackbird", artist:"The Beatles", album:"", song_id: "", genre: "", duration: ""),
-                          Track(title:"Show Must Go On", artist:"Queen", album:"", song_id: "", genre: "", duration: ""),
-                          Track(title:"Loco En El Desierto", artist:"Conociendo Rusia", album:"", song_id: "", genre: "", duration: ""),
-                        ]
-*/
+

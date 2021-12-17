@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import Network
 
 class TracksTableViewController: UITableViewController {
 
@@ -14,10 +14,31 @@ class TracksTableViewController: UITableViewController {
     var estadomusica:Bool = false
     var estadocancion:Bool = false
     
+    var notfound: UIImageView = {
+        let loveURL = Bundle.main.url(forResource: "nada", withExtension: ".gif")
+        let loveGIF = UIImage.animatedImage(withAnimatedGIFURL: loveURL!)
+        let imgContainer = UIImageView(image: loveGIF)
+        return imgContainer
+    }()
+    
+    var label: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints=false
+        label.autoresizingMask = .flexibleWidth
+        return label
+    }()
+    
+    var vista: UIView = {
+        let v1 = UIView()
+        v1.translatesAutoresizingMaskIntoConstraints=false
+        v1.autoresizingMask = .flexibleWidth
+        return v1
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Carga la vista:
+        // MARK: Carga la vista:
         guard let fondo = UIImage(named: "fondo.png") else { return }
         self.view.backgroundColor = UIColor(patternImage: fondo)
         self.tableView.rowHeight = 80
@@ -42,7 +63,51 @@ class TracksTableViewController: UITableViewController {
                     print("Timer fired!")
                     NotificationCenter.default.post(name: NSNotification.Name("updateTable"), object: nil)
                 }
+        
+        // MARK: Constrains gif
+        
+        
+        vista.backgroundColor = .white .withAlphaComponent(0)
+        vista.isHidden = true
+        vista.layer.cornerRadius = 20
+        self.view.addSubview(vista)
+        vista.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        vista.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor).isActive = true
+        vista.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        vista.widthAnchor.constraint(equalToConstant: 200).isActive = true
+        
+        label.alpha = 0
+        label.isHidden = true
+        self.view.addSubview(label)
+        label.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        label.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor, constant: -80).isActive = true
+        label.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        label.widthAnchor.constraint(equalToConstant: 200).isActive = true
+        
+        notfound.alpha = 0
+        notfound.isHidden = true
+        notfound.autoresizingMask = .flexibleWidth
+        notfound.translatesAutoresizingMaskIntoConstraints=false
+        
+        self.view.addSubview(notfound)
+        notfound.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        notfound.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor).isActive = true
+        notfound.heightAnchor.constraint(equalToConstant: 140).isActive = true
+        notfound.widthAnchor.constraint(equalToConstant: 130).isActive = true
+        
+        
+        
      
+    }
+
+    func checkconexion() {
+        if Reachability.isConnectedToNetwork(){
+            print("Internet Connection Available!")
+            //Animaciones.alertaconexion(vista: self.vista, texto: "No hay internet", gif: self.notfound, label: self.label)
+        }else{
+            print("Internet Connection not Available!")
+            Animaciones.alertaconexion(vista: self.vista, texto: "No hay internet", gif: self.notfound, label: self.label)
+        }
     }
     
     @objc func changeIcon(_ notification: Notification) {
@@ -52,12 +117,12 @@ class TracksTableViewController: UITableViewController {
                 print("ESTO ES OBSERVER TVCONTROLER true")
                 estadocancion = mysong
                 if mysong {
-                //print("CAMBIO DE ESTADO BOTON")
+                
                 } else {
                 print("ESTO ES OBSERVER TVCONTROLER false")
-        //print("No soy igual.")
+        
                 }
-    //addTrack(addedTrack: mysong)
+    
     }
     
     @objc func updateTable(_ notification: Notification) {
@@ -66,7 +131,7 @@ class TracksTableViewController: UITableViewController {
             //tableView.reloadData()
         }
 
-    // Seteo de elementos de la tabla:
+    // MARK: Seteo de elementos de la tabla:
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -74,13 +139,8 @@ class TracksTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return misTracks.count
     }
-    /*
-    override func viewWillAppear(_ animated: Bool) {
-        print(misTracks)
-        tableView.reloadData()
-    }
-     */
-    // Seteo de Celdas:
+   
+    // MARK: Seteo de Celdas:
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! TrackTableViewCell
@@ -105,7 +165,7 @@ class TracksTableViewController: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        //let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! TrackTableViewCell
+                //let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! TrackTableViewCell
         //cell.botonPlay.performTwoStateSelection()
     }
     
@@ -113,18 +173,18 @@ class TracksTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
-
-    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! TrackTableViewCell
-        
-        
-    }
     
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        //let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! TrackTableViewCell
+  
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        checkconexion()
+    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if estadocancion {
-            
-            
+    
         }
         tableView.reloadData()
         
@@ -132,7 +192,7 @@ class TracksTableViewController: UITableViewController {
     }
 
 }
-
+// MARK: Protocolo ButtonOnCell
 extension TracksTableViewController: ButtonOnCellDelegate {
     func buttonTouchedOnCell(celda: UITableViewCell) {
         view.endEditing(true)

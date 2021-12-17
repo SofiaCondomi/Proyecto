@@ -117,9 +117,6 @@ class APIManager: ViewController {
     }
     
     func checkConnectivity()-> Int{
-                ///Internet Status = 1 --> Hay conexion a Internet
-                ///Internet Status = 0 --> Hay conexion a Internet pero es de Datos Moviles
-                ///Internet Status = -1 --> No hay conexion a Internet
                 var monitor:NWPathMonitor!
                 monitor = NWPathMonitor()
                 var internetEstatus = 1

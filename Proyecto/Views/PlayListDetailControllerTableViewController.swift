@@ -9,14 +9,11 @@ import UIKit
 
 class PlayListDetailControllerTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
    
-    // Variables
+    // MARK: Variables
     var playlist : [Track] = []
     let tv = UITableView()
-    
-    
-    
-    
-    // Seteo de objetos en la vista
+
+    // MARK: Seteo de objetos en la vista
     var BotonAgregar: UIButton = {
         let b1 = UIButton(type: .roundedRect)
         let b1Image = UIImage(named: "add.png")
@@ -39,7 +36,7 @@ class PlayListDetailControllerTableViewController: UIViewController, UITableView
         return campo
     }()
     
-    // Funcion presentar picker
+    // MARK: Funcion presentar picker
     @objc func presentar() {
         let trv = TracksPickerView (frame: CGRect(x: 0, y: self.view.frame.height/2, width: self.view.frame.width, height: self.view.frame.height/2))
             trv.backgroundColor = .clear
@@ -47,6 +44,7 @@ class PlayListDetailControllerTableViewController: UIViewController, UITableView
             print(tracksArray)
             self.view.addSubview(trv)
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         tv.reloadData()
     }
@@ -54,13 +52,10 @@ class PlayListDetailControllerTableViewController: UIViewController, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         tv.reloadData()
-        //let tabla = AudioPlayerViewController()
-        //tabla.delegado = self
         guard let fondo = UIImage(named: "fondo.png") else { return }
-        //self.view.backgroundColor = UIColor(patternImage: UIImage(named: "fondo.png")!)
         self.view.backgroundColor = UIColor(patternImage: fondo)
 
-        // Seteo TextField:
+        // MARK: Seteo TextField:
         
         self.view.addSubview(campotexto)
         campotexto.backgroundColor = .white.withAlphaComponent(0.7)
@@ -68,7 +63,7 @@ class PlayListDetailControllerTableViewController: UIViewController, UITableView
         campotexto.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive     = true
         campotexto.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -80).isActive  = true
         
-        // Seteo TableView
+        // MARK: Seteo TableView
         tv.backgroundColor = .white.withAlphaComponent(0.7)
         tv.tintColor = UIColor(red: 255.0, green: 0, blue: 225.0, alpha: 1)
         tv.frame = self.view.frame.insetBy(dx: 20, dy:100)
@@ -79,24 +74,17 @@ class PlayListDetailControllerTableViewController: UIViewController, UITableView
         tv.delegate = self
         
         
-        // Seteo botones:
+        // MARK: Seteo botones:
         BotonAgregar.frame=CGRect(x: 350, y: 50, width: 50, height: 50)
         BotonAgregar.tintColor=UIColor(red: 255.0, green: 0, blue: 225.0, alpha: 1)
         BotonAgregar.translatesAutoresizingMaskIntoConstraints=true
         BotonAgregar.autoresizingMask = .flexibleLeftMargin
         self.view.addSubview(BotonAgregar)
-        /*
-        BotonAgregar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 5).isActive = true
-        BotonAgregar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: -30).isActive     = true
-        BotonAgregar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 350).isActive  = true
-        //BotonAgregar.autoresizingMask = .flexibleLeftMargin
-        //BotonAgregar.autoresizingMask = .flexibleRightMargin
-         */
        
     }
     
 
-    // Llenado de TableView
+    // MARK: Llenado de TableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         tracksArray.count
     }
@@ -110,7 +98,7 @@ class PlayListDetailControllerTableViewController: UIViewController, UITableView
                  return cell
     }
     
-    // Desselecionar fila
+    // MARK: Desselecionar fila
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -123,6 +111,8 @@ class PlayListDetailControllerTableViewController: UIViewController, UITableView
         self.view.endEditing(true)
     }
     
+    
+    // MARK: Delet
     func tableview( _ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle{
             return .delete
         }
@@ -143,7 +133,7 @@ class PlayListDetailControllerTableViewController: UIViewController, UITableView
     
 }
 
-// Implementacion del protocolo
+// MARK: Implementacion del protocolo
 extension PlayListDetailControllerTableViewController: TracksPickerDelegate {
     func addTrack(track: Track) {
        // print(track)
@@ -154,6 +144,7 @@ extension PlayListDetailControllerTableViewController: TracksPickerDelegate {
     
 }
 
+// MARK: Implementacion de protocolo
 extension PlayListDetailControllerTableViewController: TracksDelegate {
     func estadoPlayer(estado: Bool) {
         print("player")
@@ -164,11 +155,9 @@ extension PlayListDetailControllerTableViewController: TracksDelegate {
     }
     
     func addTrackto(track: Track) {
-        print("ESTOY VIVA")
         print(track)
            tracks.insert(track)
            tracksArray = Array(tracks)
-       // print(tracksArray)
            tv.reloadData()
        }
 

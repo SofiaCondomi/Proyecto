@@ -11,6 +11,9 @@ class BienvenidaViewController: UIViewController {
         
     @IBOutlet weak var imagenLogo: UIImageView!
     @IBOutlet weak var welcome: UILabel!
+    
+    
+    
         override func viewDidLoad() {
             super.viewDidLoad()
             welcome.textColor = UIColor(named: "Color")
@@ -18,6 +21,7 @@ class BienvenidaViewController: UIViewController {
             self.view.backgroundColor = UIColor(patternImage: fondo)
             
             agregarGestosImagen()
+            
             
         }
         
@@ -58,10 +62,10 @@ class BienvenidaViewController: UIViewController {
 
 }
 
-extension UIViewController {
-    func alertOK(title: String, message: String, action: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: action, style: .default, handler: { _ in }))
-        self.present(alert, animated: true, completion: nil)
-    }
-}
+//extension UIViewController {
+//    func alertOK(title: String, message: String, action: String) {
+//        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+//        alert.addAction(UIAlertAction(title: action, style: .default, handler: { _ in }))
+//        self.present(alert, animated: true, completion: nil)
+//    }
+//}

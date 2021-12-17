@@ -53,6 +53,12 @@
 		DAC5917D2733209C00195057 /* TracksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC5917C2733209C00195057 /* TracksTableViewController.swift */; };
 		DAC7089C276280FF0049B5FA /* DownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC7089B276280FF0049B5FA /* DownloadManager.swift */; };
 		DAD155D4276C361700882D74 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD155D3276C361700882D74 /* RegisterViewModel.swift */; };
+		DAD155D6276C42E500882D74 /* lovecute.gif in Resources */ = {isa = PBXBuildFile; fileRef = DAD155D5276C42E500882D74 /* lovecute.gif */; };
+		DAD155D8276C43CF00882D74 /* cuidado.gif in Resources */ = {isa = PBXBuildFile; fileRef = DAD155D7276C43CF00882D74 /* cuidado.gif */; };
+		DAD155DA276C484900882D74 /* hello2.gif in Resources */ = {isa = PBXBuildFile; fileRef = DAD155D9276C484800882D74 /* hello2.gif */; };
+		DAD155DC276C49AF00882D74 /* notfound.gif in Resources */ = {isa = PBXBuildFile; fileRef = DAD155DB276C49AF00882D74 /* notfound.gif */; };
+		DAD155DE276C4FD500882D74 /* Conexion.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD155DD276C4FD500882D74 /* Conexion.swift */; };
+		DAD155E0276C50A600882D74 /* nada.gif in Resources */ = {isa = PBXBuildFile; fileRef = DAD155DF276C50A500882D74 /* nada.gif */; };
 		DAEFB6A62747D38B0051E356 /* Network.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAEFB6A52747D38B0051E356 /* Network.framework */; };
 /* End PBXBuildFile section */
 
@@ -130,6 +136,12 @@
 		DAC5917C2733209C00195057 /* TracksTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TracksTableViewController.swift; sourceTree = "<group>"; };
 		DAC7089B276280FF0049B5FA /* DownloadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadManager.swift; sourceTree = "<group>"; };
 		DAD155D3276C361700882D74 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
+		DAD155D5276C42E500882D74 /* lovecute.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = lovecute.gif; sourceTree = "<group>"; };
+		DAD155D7276C43CF00882D74 /* cuidado.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = cuidado.gif; sourceTree = "<group>"; };
+		DAD155D9276C484800882D74 /* hello2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = hello2.gif; sourceTree = "<group>"; };
+		DAD155DB276C49AF00882D74 /* notfound.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = notfound.gif; sourceTree = "<group>"; };
+		DAD155DD276C4FD500882D74 /* Conexion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conexion.swift; sourceTree = "<group>"; };
+		DAD155DF276C50A500882D74 /* nada.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = nada.gif; sourceTree = "<group>"; };
 		DAEFB6A52747D38B0051E356 /* Network.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Network.framework; path = System/Library/Frameworks/Network.framework; sourceTree = SDKROOT; };
 		F1C083E6C2F43F5F624BD60C /* Pods-ProyectoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProyectoTests.release.xcconfig"; path = "Target Support Files/Pods-ProyectoTests/Pods-ProyectoTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -227,12 +239,14 @@
 			children = (
 				DA2EC6FA27473DA000DF899E /* APIIManager.swift */,
 				DA2EC6F72746D8B900DF899E /* DataManager.swift */,
+				DABBD4A22769152D0096014E /* RestServiceManager.swift */,
+				DAC7089B276280FF0049B5FA /* DownloadManager.swift */,
 				DA046B7027500145007798E9 /* UIButton+extension.swift */,
 				DABF0DD52763C78E00350AF1 /* UITextField+extension.swift */,
 				DA046B7227500D0F007798E9 /* UILabel+extension.swift */,
-				DAC7089B276280FF0049B5FA /* DownloadManager.swift */,
+				DA00C3D2274D6D1200FF5FD2 /* BotonDestacado.swift */,
 				DABF0DD72763C7B500350AF1 /* animaciones.swift */,
-				DABBD4A22769152D0096014E /* RestServiceManager.swift */,
+				DAD155DD276C4FD500882D74 /* Conexion.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -246,6 +260,11 @@
 				DA9211E02744C888008D52C7 /* fondo.gif */,
 				DAB3CF28276ACEDA00DAC20E /* love.gif */,
 				DAA3C311276B89BB0000C400 /* heart.gif */,
+				DAD155D5276C42E500882D74 /* lovecute.gif */,
+				DAD155D7276C43CF00882D74 /* cuidado.gif */,
+				DAD155D9276C484800882D74 /* hello2.gif */,
+				DAD155DB276C49AF00882D74 /* notfound.gif */,
+				DAD155DF276C50A500882D74 /* nada.gif */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -259,8 +278,6 @@
 				DABBD4A6276975F40096014E /* LoginViewController.swift */,
 				DAC356B82729C12C0086B868 /* RegisterViewController.swift */,
 				DABDBF0C272C41B3006BAC69 /* BienvenidaViewController.swift */,
-				DA167C9B2722F3EA00E835FC /* ViewController.swift */,
-				DA00C3D2274D6D1200FF5FD2 /* BotonDestacado.swift */,
 				DAC5917C2733209C00195057 /* TracksTableViewController.swift */,
 				DAC26E672735588600EA3320 /* TrackTableViewCell.swift */,
 				DAC26E69273567FD00EA3320 /* AudioPlayerViewController.swift */,
@@ -274,9 +291,10 @@
 			isa = PBXGroup;
 			children = (
 				DA167C972722F3EA00E835FC /* AppDelegate.swift */,
+				DA167C992722F3EA00E835FC /* SceneDelegate.swift */,
+				DA167C9B2722F3EA00E835FC /* ViewController.swift */,
 				DAC26E652735575000EA3320 /* ButtomOnCellDelagate.swift */,
 				DABBD4A427692F870096014E /* Protocolos.swift */,
-				DA167C992722F3EA00E835FC /* SceneDelegate.swift */,
 				DABAEAB8275E986B0057A691 /* Extension.swift */,
 			);
 			path = Common;
@@ -440,13 +458,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DAD155DA276C484900882D74 /* hello2.gif in Resources */,
 				DAC320F0273E202A0090A2C3 /* WAVE-1s.gif in Resources */,
 				DAA3C312276B89BB0000C400 /* heart.gif in Resources */,
 				DABFB52427441FC600121BFF /* cancion01.mp3 in Resources */,
+				DAD155E0276C50A600882D74 /* nada.gif in Resources */,
 				DAB3CF29276ACEDA00DAC20E /* love.gif in Resources */,
 				DA167CA72722F3EC00E835FC /* LaunchScreen.storyboard in Resources */,
+				DAD155DC276C49AF00882D74 /* notfound.gif in Resources */,
 				DA046B7527501288007798E9 /* mario.gif in Resources */,
+				DAD155D8276C43CF00882D74 /* cuidado.gif in Resources */,
 				DA9211E12744C888008D52C7 /* fondo.gif in Resources */,
+				DAD155D6276C42E500882D74 /* lovecute.gif in Resources */,
 				DA167CA42722F3EC00E835FC /* Assets.xcassets in Resources */,
 				DA167C9F2722F3EA00E835FC /* Main.storyboard in Resources */,
 			);
@@ -597,6 +620,7 @@
 				DA00C3D3274D6D1200FF5FD2 /* BotonDestacado.swift in Sources */,
 				DABF0DD62763C78E00350AF1 /* UITextField+extension.swift in Sources */,
 				DABDBF09272C3206006BAC69 /* Modelos.swift in Sources */,
+				DAD155DE276C4FD500882D74 /* Conexion.swift in Sources */,
 				DABAEAB9275E986B0057A691 /* Extension.swift in Sources */,
 				DABBD4A9276976B50096014E /* LoginViewModel.swift in Sources */,
 				DAC26E682735588600EA3320 /* TrackTableViewCell.swift in Sources */,

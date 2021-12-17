@@ -8,18 +8,17 @@
 import Foundation
 import UIKit
 
-extension ViewController {
-    func alertaanimada(alerta: UIView, textoalerta: UILabel, texto: String) {
+public class Animaciones {
+    
+   class func alertaanimada(alerta: UIView, textoalerta: UILabel, texto: String) {
         var timer = Timer()
-        //alerta.alpha = 1
-        //textoalerta.alpha = 1
+
         UIView.animate(withDuration: 2, delay: 0, animations:   {
             alerta.alpha = 1
             textoalerta.alpha = 1
             textoalerta.tintColor = UIColor(named: "Color")
             textoalerta.textColor = UIColor(named: "Color")
             alerta.backgroundColor = .white .withAlphaComponent(1)
-            //alerta.backgroundColor?.withAlphaComponent(0.5)
             alerta.isHidden = false
             alerta.center.y += 100
             textoalerta.text = texto
@@ -45,13 +44,11 @@ extension ViewController {
         
     }
     
-    func vistaCustom(vista: UIView, texto: String, gif: UIImageView, label: UILabel) {
+   class func vistaCustom(vista: UIView, texto: String, gif: UIImageView, label: UILabel) {
         var timer = Timer()
-        //alerta.alpha = 1
-        //textoalerta.alpha = 1
+        
         UIView.animate(withDuration: 1, delay: 0, animations:   {
             
-            //vista.backgroundColor = UIColor(named: "Color")? .withAlphaComponent(0.7)
             vista.backgroundColor = .white
             vista.isHidden = false
             gif.isHidden = false
@@ -79,7 +76,6 @@ extension ViewController {
                         gif.isHidden = true
                         
                         
-                        
                 })
                     
             }
@@ -88,4 +84,28 @@ extension ViewController {
         return
         
     }
+    
+    class func alertaconexion(vista: UIView, texto: String, gif: UIImageView, label: UILabel) {
+         var timer = Timer()
+         //alerta.alpha = 1
+         //textoalerta.alpha = 1
+         UIView.animate(withDuration: 3, delay: 0, animations:   {
+             
+             //vista.backgroundColor = UIColor(named: "Color")? .withAlphaComponent(0.7)
+             vista.backgroundColor = .white
+             vista.isHidden = false
+             gif.isHidden = false
+             vista.alpha = 1
+             gif.alpha = 1
+             label.alpha = 1
+             label.isHidden = false
+             label.backgroundColor = .clear
+             label.text = texto
+             label.textAlignment = .center
+             label.textColor = UIColor(named: "Color")
+             
+            })
+         return
+         
+     }
 }

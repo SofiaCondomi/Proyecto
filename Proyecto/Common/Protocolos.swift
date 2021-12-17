@@ -10,12 +10,10 @@ import UIKit
 
 protocol ButtonOnCellDelegate  {
     func buttonTouchedOnCell(celda: UITableViewCell)
-    
 }
 
 protocol TracksPickerDelegate {
     func addTrack (track:Track)
-    
 }
 
 protocol TracksDelegate {
